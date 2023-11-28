@@ -1,6 +1,5 @@
 import pygame
 
-#this will eventually extend sprite. Right now, it will just have a rectangle for collisions
 class Light():
     #pass position to
     def __init__(self, x, y, isAlive):
@@ -14,7 +13,7 @@ class Light():
         self.attack_CD = 0.0
 
         #for handling drawing
-        self.max_radius = 200
+        self.max_radius = 300
         self.min_radius = 50
 
 
@@ -38,9 +37,11 @@ class Light():
 
 
 
-    def draw(self, darkness):
+    def draw(self, darkness, camera_x, camera_y):
+        draw_x = self.x + camera_x
+        draw_y = self.y + camera_y
         if self.alive:
-            darkness.blit(self.light_surface, (self.x - self.max_radius, self.y - self.max_radius), special_flags = pygame.BLEND_RGBA_SUB)
+            darkness.blit(self.light_surface, (draw_x - self.max_radius, draw_y - self.max_radius), special_flags = pygame.BLEND_RGBA_SUB)
 
     def refresh(self):
         self.health  = 1.0

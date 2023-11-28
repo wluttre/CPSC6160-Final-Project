@@ -1,39 +1,44 @@
 import pygame
-
+import ui
 class Viewport():
-    def __init__(self, x, y, width, height):
+    def __init__(self, player_rect, width, height):
 
         #overall map size
         self.width = width
         self.height = height
 
-        #top left corner, will be based on player position
-        self.x = x
-        self.y = y
+        self.x = player_rect.centerx
+        self.y = player_rect.centery
 
         self.view = pygame.Surface((self.width, self.height))
 
-    def update_viewport(self, player_rect, map_width, map_height):
+        self.ui = ui.UI(10, 10, 0.5)
 
-        #deltaX = abs(self.x) + self.width
-        #deltaX -= player_rect.centerx
+    def update_viewport(self, player, map_width, map_height, scale_factor):
 
-        #deltaY = abs(self.y) + self.height
-        #deltaY -= player_rect.centery
-        self.x = -(player_rect.centerx - self.width/2)
-        self.y = -(player_rect.centery - self.height/2)
+        self.x = -(player.rect.centerx - self.width/2)
+        self.y = -(player.rect.centery - self.height/2)
 
-        if(self.x > 0):
+        # to scale the map, need to scale viewport movement like this, scale factor of 0.5
+        inverted_scale = 1/scale_factor
+        self.x = -(player.rect.centerx - self.width/2 * inverted_scale)*scale_factor
+        self.y = -(player.rect.centery - self.height/2 * inverted_scale)*scale_factor
+
+        if self.x > 0:
             self.x = 0
-        elif( abs(self.x) > map_width - self.width):
-            self.x = -1*(map_width - self.width)
+        elif abs(self.x) > (map_width * scale_factor - self.width):
+            self.x = -1*(map_width * scale_factor - self.width)
 
         if(self.y > 0):
             self.y = 0
-        elif(abs(self.y) > map_height - self.height):
-            self.y = -1*(map_height - self.height)
+        elif abs(self.y) > (map_height * scale_factor - self.height):
+            self.y = -1*(map_height * scale_factor - self.height)
 
-    def draw(self, world):
-        self.view.fill((0,0,0))
-        self.view.blit(world, (self.x, self.y))
+        has_key = "door_key" in player.inventory and player.inventory["door_key"]
+        self.ui.update(player.light.health, player.inventory["Flares"], has_key)
+
+    def draw(self, screen):
+        #self.view.fill((0,0,0))
+        #self.view.blit(world, (self.x, self.y))
+        self.ui.draw(screen)
         #print(self.x, ", ", self.y)

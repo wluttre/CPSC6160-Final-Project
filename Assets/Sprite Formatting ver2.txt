@@ -1,0 +1,18 @@
+Sprite Formatting:
+all spritesheets/tilesets have a 10 pixel offset denoted by a red line.
+
+formatting of each tileset/spritesheet:
+
+BG tileset: 512x512
+
+FG tileset: 512x512
+
+Torch UI Spritesheet: 251x301
+
+Player Spritesheeet: 301X393
+
+Torch Spritesheet: 39x171
+
+Flare Spritesheet: 116x19
+
+Door Spritesheet: 265x440

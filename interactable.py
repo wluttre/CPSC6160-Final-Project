@@ -1,7 +1,6 @@
 import pygame
 
-#this will eventually extend sprite. Right now, it will just have a rectangle for collisions
-class Interactable():
+class Interactable(pygame.sprite.Sprite):
     #pass initial position for rectangle here as x and y
     def __init__(self, x, y):
         self.rect = pygame.Rect(x, y, 25, 25)

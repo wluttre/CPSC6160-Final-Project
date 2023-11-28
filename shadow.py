@@ -9,7 +9,7 @@ class Shadow():
         self.y = y
 
         #for drawing:
-        self.radius = 300
+        self.radius = 500
         self.darkness_level = 230
 
 
@@ -25,13 +25,14 @@ class Shadow():
 
         #for AI
         self.hunting_radius = self.radius
+        self.hunting_speed = 10
 
         self.attack_radius = self.radius*2
 
 
         #when attacking, calculate direction to target, then mult by speed
         self.direction = [0,0]
-        self.speed = 5
+        self.speed = 20
 
         # holds a reference to the light object it is targeting
         self.target = []
@@ -56,16 +57,20 @@ class Shadow():
         # 2 = attacking
         # 3 = dazed
         self.state = 0
-    def draw(self, darkness):
+    def draw(self, darkness, camera_x, camera_y):
         self.darkness_surface.fill((0, 0, 0, 0))
+
+        draw_x = self.x + camera_x
+        draw_y = self.y + camera_y
+
         #DEBUG range
         if self.state == 1:
             pygame.draw.circle(self.darkness_surface, (0,0,0, self.darkness_level), (self.radius*2, self.radius*2), self.radius)
-            pygame.draw.circle(self.darkness_surface, (255,0,0, 255), (self.radius*2, self.radius*2), self.hunting_radius, 2)
+            #pygame.draw.circle(self.darkness, (255,0,0, 255), (self.radius*2, self.radius*2), self.hunting_radius, 2)
         elif self.state == 2:
             pygame.draw.circle(self.darkness_surface, (0,0,0, self.darkness_level), (self.radius*2, self.radius*2), self.radius)
 
-        darkness.blit(self.darkness_surface, (self.x - self.radius*2, self.y - self.radius*2), special_flags = pygame.BLEND_RGBA_ADD)
+        darkness.blit(self.darkness_surface, (draw_x - self.radius*2, draw_y - self.radius*2), special_flags = pygame.BLEND_RGBA_ADD)
 
     def update(self, light_list):
         if self.state == 1:
@@ -73,7 +78,7 @@ class Shadow():
         elif self.state == 2:
             self.attack_ai()
         elif self.state == 3:
-            print("dazed")
+            self.dazed_ai()
         else:
             #print("inactive")\
             pass
@@ -82,7 +87,7 @@ class Shadow():
 
     def hunt_ai(self, light_list):
             #print("hunting")
-            self.hunting_radius += 1
+            self.hunting_radius += self.hunting_speed
             distance = 0.0
 
             for light in light_list:
@@ -128,3 +133,10 @@ class Shadow():
                 # attack()
                 #   attack cd = 50
                 #   attack.append (attack.spawn(x,y, direction))
+
+    def dazed_ai(self):
+        #print(self.dazed_timer)
+        if self.dazed_timer > 0:
+            self.dazed_timer -= 1
+        else:
+            self.state = 1

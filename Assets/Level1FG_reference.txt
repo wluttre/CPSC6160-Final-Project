@@ -1,0 +1,15 @@
+2WayH
+2WayV
+4Way
+1WayLeft
+1WayRight
+1WayDown
+1WayUp
+3WayUp
+3WayDown
+3WayLeft
+3WayRight
+2WayBR
+2WayTR
+2WayTL
+2WayBL

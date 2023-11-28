@@ -1,0 +1,6 @@
+2WayTL,2WayH,2WayH,2WayH,2WayH,2WayH,2WayH,2WayH,2WayH,2WayTR
+2WayV,e,e,1WayRight,2WayTR,e,e,e,e,2WayV
+3WayRight,2WayH,1WayLeft,1WayRight,4Way,1WayLeft,e,e,e,2WayV
+2WayV,e,e,e,2WayV,1WayRight,2WayH,1WayLeft,e,2WayV
+1WayUp,e,e,e,1WayUp,e,e,e,1WayRight,3WayLeft
+2WayH,2WayH,2WayH,2WayH,2WayH,2WayH,2WayH,2WayH,2WayH,2WayBR

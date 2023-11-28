@@ -1,0 +1,6 @@
+Top Left,Top,Top,Top,Top,Top,Top,Top,Top,Top Right
+Left,Center,CenterWindow,Center,Center,Center,Center,Center,Center,Right
+Left,Center,Center,Center,Center,Center,Center,Center,Center,Right
+Left,Center,Center,Center,Center,Center,Center,Center,Center,Right
+Left,Center,CenterWindow,Center,Center,Center,Center,CenterWindow,Center,Right
+Bottom Left,Bottom,Bottom,Bottom,Bottom,Bottom,Bottom,Bottom,Bottom,Bottom Right
